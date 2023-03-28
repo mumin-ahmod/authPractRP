@@ -1,7 +1,10 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-<?php include "header.html"; ?>
+<?php include "header.html" ;
+include '../config.php';
+
+?>
 
 <br>
 
@@ -22,9 +25,9 @@
 
   <?php 
     $count = 1;
-  while($rows>0){
+  while($row = $result->fetch()){
   
-    $row = $result->fetch_array(MYSQLI_NUM);
+    // $row = $result->fetch();
     $r0 = htmlspecialchars($row[0]);
     $r1 = htmlspecialchars($row[1]);
     $r2 = htmlspecialchars($row[2]);
@@ -46,7 +49,7 @@
 
       <td>
      
-      <form action="sqltest.php" method="post">
+      <form action="../config.php" method="post">
     
 
       <input type='hidden' name='delete' value='yes'>
@@ -65,7 +68,7 @@
     </tr>
     <?php 
   $count++;
-    $rows--;
+    //$rows--;
   }
   ?>
   </tbody>

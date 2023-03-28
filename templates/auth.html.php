@@ -1,10 +1,5 @@
 <?php
 
-session_start();
-
-if(isset($_SESSION['loggedin']) && $_SESSION["loggedin"] === true){
-  header("lcation: welcome.html.php");
-}
 
 
 ?>
@@ -24,7 +19,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION["loggedin"] === true){
 <body>
 
 
-<form action='auth.php' method="post">
+<form action='../auth.php' method="post">
 <div class="mb-3">
   <label for="formGroupExampleInput" class="form-label">Username:</label>
   <input type="text" class="form-control" id="formGroupExampleInput" placeholder="username" name="username">
