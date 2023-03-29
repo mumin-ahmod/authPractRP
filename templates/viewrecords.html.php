@@ -1,8 +1,9 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-<?php include "header.html" ;
-include '../config.php';
+<?php  include_once "header.html" ;
+
+// include_once "../config.php";
 
 ?>
 
@@ -49,7 +50,8 @@ include '../config.php';
 
       <td>
      
-      <form action="../config.php" method="post">
+ 
+      <form action= 'authpractrp\config.php' method="post"> // PROBLEM IN CONFIG FILE
     
 
       <input type='hidden' name='delete' value='yes'>

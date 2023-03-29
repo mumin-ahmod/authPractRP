@@ -1,9 +1,13 @@
 <?php
 
+
+
+
+
 session_start();
 
 if (isset($_SESSION['loggedin']) && $_SESSION["loggedin"] === true) {
-    header("lcation: welcome.html.php");
+    header("location: config.php");
 }
 
 // CHECK SESSION OF EXISTING LOGIN-------------
@@ -28,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if (isset($username) && isset($password)) {
 
-        header("location: templates/viewrecords.html.php");
+        header("location: config.php");
 
     } else {
 

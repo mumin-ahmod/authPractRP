@@ -19,7 +19,7 @@
 <body>
 
 
-<form action='../auth.php' method="post">
+<form action="..\auth.php" method="post">
 <div class="mb-3">
   <label for="formGroupExampleInput" class="form-label">Username:</label>
   <input type="text" class="form-control" id="formGroupExampleInput" placeholder="username" name="username">

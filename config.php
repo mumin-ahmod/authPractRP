@@ -1,32 +1,29 @@
 <?php
 
-include 'login.php';
+
+// INCLUDED VIEW RECORDS AT LAST
+
+// PROBLEM1: DELETE WORKING BUT NOTHING SHOWING AFTER DELETE
+// PROBLEM2: GO TO COPY FOLDER , LINK IS NOT WORKING, DELETE IS NOT WORKING, ADD IS NOT WORKING, CONFIG.PHP IS NOT FOUND
+
+include_once 'login.php';
 
 try {
-    $pdo = new PDO("mysql:host=$hn; dbname=$db", "$un", "$pw");
+ 
 
-    $output = 'Database connection established.';
+    // $pdo = new PDO("mysql:host=$hn; dbname=$db", "$un", "$pw");
 
-//     $sql = 'CREATE TABLE joke(
+    // $output = 'Database connection established.';
 
-//     id NOT NULL AUTO_INCREMENT PRIMARY KEY,
-//     joketext TEXT,
-//     jokedate DATE NOT NULL
-// )';
+    if (isset($_POST['delete']) && isset($_POST['id'])) { //if delte set
 
-    // $pdo->exec($sql);
+        
 
-    $output = 'created successfully';
-
-    if (isset($_POST['delete']) && isset($_POST['id'])) {
-
-        //delete query
-
-        $id = get_post($conn, 'id');
+        $id = $_POST['id'];
 
         $sql = "DELETE FROM classics WHERE id= '$id'"; //making query
 
-        $result = $conn->query($query); //performing query/ take resutl
+        $result = $pdo->query($sql); //performing query/ take resutl
         if (!$result) {
             echo "DELETE failed<br><br>";
         }
@@ -36,7 +33,9 @@ try {
 
     }
 
-    if (isset($_POST['author']) &&
+
+
+    if (isset($_POST['author']) && // INSERT SET
         isset($_POST['title']) &&
         isset($_POST['category']) &&
         isset($_POST['year']) &&
@@ -44,13 +43,13 @@ try {
 
     ) {
 
-        $author = get_post($conn, 'author'); //take the author from
+        $author = $_POST['author']; //take the author from
         // html form with get post and save it to the variable ($<-data<-post<html-Form)
 
-        $title = get_post($conn, 'title');
-        $category = get_post($conn, 'category');
-        $year = get_post($conn, 'year');
-        $isbn = get_post($conn, 'isbn');
+        $title = $_POST['title'];
+        $category = $_POST['category'];
+        $year = $_POST['year'];
+        $isbn = $_POST['isbn'];
 
         // time to perform the query
         $sql = "INSERT INTO classics(author, title, year, isbn, category) VALUES('$author', '$title', '$year', '$isbn', '$category')";
@@ -67,13 +66,22 @@ try {
     $result = $pdo->query($sql);
     if (!$result) {
         die("Database access failed");
-    }
-    $rows = $result->rowCount();
+    }else{
 
-    function get_post($conn, $var)
-    {
-        return $conn->real_escape_string($_POST[$var]);
+        echo "selectdone";
+
+        $rows = $result->rowCount();
+
+        include 'templates/viewrecords.html.php';
     }
+   
+
+    // function get_post($conn, $var)
+    // {
+    //     return $conn->real_escape_string($_POST[$var]);
+    // }
+
+    
 
 } catch (PDOException $e) {
 

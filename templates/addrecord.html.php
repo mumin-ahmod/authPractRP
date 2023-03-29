@@ -18,7 +18,7 @@
 
 <br>
 
-<form action="sqltest.php" method="post">
+<form action= "../config.php" method="post">
 
 
 <div class="row">
