@@ -1,6 +1,5 @@
 <?php
 
-
 // INCLUDED VIEW RECORDS AT LAST
 
 // PROBLEM1: DELETE WORKING BUT NOTHING SHOWING AFTER DELETE
@@ -9,15 +8,8 @@
 include_once 'login.php';
 
 try {
- 
-
-    // $pdo = new PDO("mysql:host=$hn; dbname=$db", "$un", "$pw");
-
-    // $output = 'Database connection established.';
 
     if (isset($_POST['delete']) && isset($_POST['id'])) { //if delte set
-
-        
 
         $id = $_POST['id'];
 
@@ -33,55 +25,27 @@ try {
 
     }
 
-
-
-    if (isset($_POST['author']) && // INSERT SET
-        isset($_POST['title']) &&
-        isset($_POST['category']) &&
-        isset($_POST['year']) &&
-        isset($_POST['isbn'])
-
-    ) {
-
-        $author = $_POST['author']; //take the author from
-        // html form with get post and save it to the variable ($<-data<-post<html-Form)
-
-        $title = $_POST['title'];
-        $category = $_POST['category'];
-        $year = $_POST['year'];
-        $isbn = $_POST['isbn'];
-
-        // time to perform the query
-        $sql = "INSERT INTO classics(author, title, year, isbn, category) VALUES('$author', '$title', '$year', '$isbn', '$category')";
-
-        $result = $pdo->query($sql);
-
-        if (!$result) {
-            echo "insert failed <br> <br>";
-        }
-
-    } //-----INSERT DONE
-
-    $sql = "SELECT * FROM classics"; // select
+    $sql = "SELECT * FROM classics"; // select AWLWAYS - EVERYTIME WORKS
     $result = $pdo->query($sql);
     if (!$result) {
         die("Database access failed");
-    }else{
-
-        echo "selectdone";
+    } else {
 
         $rows = $result->rowCount();
 
+        ob_start();
+
         include 'templates/viewrecords.html.php';
+
+        $title = "Show Records";
+
+        $output = ob_get_clean(); // OB -S WORK IS ENDED & THE WHOLE HTML IS SHOWN
     }
-   
 
     // function get_post($conn, $var)
     // {
     //     return $conn->real_escape_string($_POST[$var]);
     // }
-
-    
 
 } catch (PDOException $e) {
 
@@ -89,3 +53,5 @@ try {
     $e->getFile() . ':' . $e->getLine();
 
 }
+
+include 'templates/layout.html.php';
